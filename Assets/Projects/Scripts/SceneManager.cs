@@ -12,6 +12,22 @@ public class SceneManager : MonoBehaviour
 
     void Update()
     {
+        _currentSceneState.Execute();                   // 現在の画面を実行中
+    }
 
+    /// <summary>
+    /// 画面の状態を切り替える
+    /// </summary>
+    /// <param name="nextScene"></param>
+    public void ChangeScene(IState nextScene)
+    {
+        // 現在の画面処理を終了する
+        _currentSceneState.Exit();
+
+        // 次の画面を、次の画面で上書き
+        _currentSceneState = nextScene;
+
+        // 新しい画面を開始する
+        _currentSceneState.Enter();
     }
 }
